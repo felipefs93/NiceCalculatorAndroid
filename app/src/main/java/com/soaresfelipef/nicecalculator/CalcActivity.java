@@ -1,5 +1,6 @@
 package com.soaresfelipef.nicecalculator;
 
+import android.support.annotation.StringDef;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,16 @@ import org.w3c.dom.Text;
 
 public class CalcActivity extends AppCompatActivity {
 
+    public enum Operation{
+        ADD, SUBTRACT, DIVIDE, MULTIPLY, EQUAL
+    }
+
+    String runningNumber = "";
+    String leftValueStr = "";
+    String rightValueStr = "";
+
+
+    TextView resultTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,72 +46,116 @@ public class CalcActivity extends AppCompatActivity {
         ImageButton subtractButton = (ImageButton)findViewById(R.id.subtractButton);
         ImageButton addButton = (ImageButton)findViewById(R.id.addButton);
 
-        TextView resultTextView = (TextView)findViewById(R.id.textView);
+
+        resultTextView = (TextView)findViewById(R.id.textView);
+        resultTextView.setText("");
 
         zeroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                numberPressed(0);
             }
         });
 
         oneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                numberPressed(1);
             }
         });
 
         twoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                numberPressed(2);
             }
         });
 
         threeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                numberPressed(3);
             }
         });
 
         fourButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                numberPressed(4);
             }
         });
 
         fiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                numberPressed(5);
             }
         });
 
         sixButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                numberPressed(6);
             }
         });
 
         sevenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                numberPressed(7);
             }
         });
 
         eightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                numberPressed(8);
             }
         });
 
         nineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                numberPressed(9);
+            }
+        });
+
+        equalButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        subtractButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        divideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        multiplyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -108,5 +163,10 @@ public class CalcActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    void numberPressed(int number){
+        runningNumber += String.valueOf(number);
+        resultTextView.setText(runningNumber);
     }
 }
