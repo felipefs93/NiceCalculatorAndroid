@@ -19,6 +19,8 @@ public class CalcActivity extends AppCompatActivity {
     String runningNumber = "";
     String leftValueStr = "";
     String rightValueStr = "";
+    Operation currentOperation;
+    int result = 0;
 
 
     TextView resultTextView;
@@ -47,7 +49,7 @@ public class CalcActivity extends AppCompatActivity {
         ImageButton addButton = (ImageButton)findViewById(R.id.addButton);
 
 
-        resultTextView = (TextView)findViewById(R.id.textView);
+        resultTextView = (TextView)findViewById(R.id.resultTextView);
         resultTextView.setText("");
 
         zeroButton.setOnClickListener(new View.OnClickListener() {
@@ -123,46 +125,84 @@ public class CalcActivity extends AppCompatActivity {
         equalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                processOperation(Operation.EQUAL);
             }
         });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                processOperation(Operation.ADD);
             }
         });
 
         subtractButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                processOperation(Operation.SUBTRACT);
             }
         });
 
         divideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                processOperation(Operation.DIVIDE);
             }
         });
 
         multiplyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                processOperation(Operation.MULTIPLY);
             }
         });
 
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                leftValueStr = "";
+                rightValueStr = "";
+                result = 0;
+                runningNumber = "";
+                currentOperation = null;
+                resultTextView.setText("0");
             }
         });
 
 
+    }
+
+    void processOperation(Operation operation){
+        if (currentOperation != null){
+
+            if (runningNumber != ""){
+                rightValueStr = runningNumber;
+                runningNumber = "";
+
+                switch (currentOperation){
+                    case ADD:
+                        result = Integer.parseInt(leftValueStr) + Integer.parseInt(rightValueStr);
+                        break;
+                    case SUBTRACT:
+                        result = Integer.parseInt(leftValueStr) - Integer.parseInt(rightValueStr);
+                        break;
+                    case MULTIPLY:
+                        result = Integer.parseInt(leftValueStr) * Integer.parseInt(rightValueStr);
+                        break;
+                    case DIVIDE:
+                        result = Integer.parseInt(leftValueStr) / Integer.parseInt(rightValueStr);
+                        break;
+                }
+
+                leftValueStr = String.valueOf(result);
+                resultTextView.setText(leftValueStr);
+            }
+        } else {
+            leftValueStr = runningNumber;
+            runningNumber = "";
+        }
+
+        currentOperation = operation;
     }
 
     void numberPressed(int number){
